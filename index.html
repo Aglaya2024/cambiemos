@@ -50,28 +50,39 @@
             max-width: 70%;
             animation: fadeIn 1.5s ease-in-out;
         }
-        h1 {
+        h1, p {
             font-size: 24px;
             font-weight: bold;
             font-family: 'Cinzel', serif;
         }
-        button {
-            margin-top: 20px;
+        .btn {
+            background-color: white;
+            color: black;
             padding: 10px 20px;
-            font-size: 18px;
-            cursor: pointer;
-            border: none;
-            border-radius: 5px;
             margin: 10px;
+            border: none;
+            cursor: pointer;
+            font-size: 18px;
+            transition: 0.3s;
+            border-radius: 5px;
         }
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
+        .btn:hover {
+            background-color: gray;
+        }
+        .hidden {
+            display: none;
+        }
+        .fade-out {
+            animation: fadeOut 2s ease-in-out forwards;
+        }
+        @keyframes fadeOut {
+            from { opacity: 1; }
+            to { opacity: 0; }
         }
     </style>
 </head>
 <body>
-    <!-- LOGO: REEMPLAZA AQUÍ CON TU IMAGEN -->
+    <!-- LOGO -->
     <img src="URL_DEL_LOGO" alt="Logo Aglaya" class="logo">
     
     <!-- VIDEO DE FONDO -->
@@ -80,78 +91,84 @@
     </video>
 
     <!-- CONTENEDOR DE PREGUNTA -->
-    <div class="container">
+    <div class="container" id="pregunta-container">
         <h1 id="pregunta"></h1>
-        <button onclick="responder('si')">Sí</button>
-        <button onclick="responder('no')">No</button>
+        <button class="btn" onclick="responder('si')">Sí</button>
+        <button class="btn" onclick="responder('no')">No</button>
+    </div>
+
+    <!-- CONTENEDOR DE RESPUESTA -->
+    <div class="container hidden" id="respuesta-container">
+        <p id="respuesta"></p>
     </div>
     
     <script>
-        // Lista de preguntas aleatorias
+        // Preguntas aleatorias
         const preguntas = [
-            "¿Estás dispuesto a hacer algo por mejorar el mundo?",
-            "¿Hoy harás una acción que ayude a alguien más?",
-            "¿Crees que pequeños cambios pueden generar grandes impactos?",
-            "¿Tienes el poder de hacer de este mundo un lugar mejor?",
-            "¿Te comprometes a cambiar algo en ti para mejorar todo a tu alrededor?"
+            "¿Te comprometes a hacer un cambio en tu vida hoy?",
+            "¿Estás dispuesto a dar el primer paso hacia un futuro mejor?",
+            "¿Harás algo bueno por alguien hoy sin esperar nada a cambio?",
+            "¿Serás más consciente del impacto de tus acciones?"
         ];
 
-        // Respuestas si eligen SÍ
+        // Respuestas motivacionales
         const respuestasSi = [
-            "Tu voluntad de cambio inspira a los demás.",
-            "Cada paso cuenta, sigue adelante.",
-            "El mundo necesita más personas como tú.",
-            "Lo que haces hoy, mejora el mañana.",
-            "Gracias por sumar al cambio positivo."
+            "Pequeños pasos llevan a grandes cambios. ¡Adelante!",
+            "Cada acción positiva te acerca a un mundo mejor.",
+            "Lo importante es comenzar. ¡Eres increíble!"
         ];
 
-        // Respuestas si eligen NO
         const respuestasNo = [
-            "Reflexiona sobre cómo puedes contribuir de otra forma.",
-            "A veces un pequeño cambio en perspectiva lo cambia todo.",
-            "Siempre hay otra oportunidad para empezar.",
-            "El cambio empieza en uno mismo, y siempre es posible.",
-            "Quizás mañana te animes a dar el primer paso."
+            "El cambio empieza cuando estés listo, y aquí estaremos para inspirarte.",
+            "Cada día es una oportunidad para mejorar. Reflexiona y vuelve cuando quieras.",
+            "No pasa nada, el cambio es un proceso. Cuando estés listo, el mundo te esperará."
         ];
 
-        // Lista de videos aleatorios
+        // Videos aleatorios
         const videos = [
-            "URL_VIDEO_1",
-            "URL_VIDEO_2",
-            "URL_VIDEO_3",
-            "URL_VIDEO_4",
-            "URL_VIDEO_5",
-            "URL_VIDEO_6",
-            "URL_VIDEO_7",
-            "URL_VIDEO_8"
+            "URL_VIDEO_1", "URL_VIDEO_2", "URL_VIDEO_3", "URL_VIDEO_4"
         ];
 
         function obtenerAleatorio(lista) {
             return lista[Math.floor(Math.random() * lista.length)];
         }
 
-        function mostrarPregunta() {
+        function cargarPregunta() {
             document.getElementById("pregunta").textContent = obtenerAleatorio(preguntas);
+            document.getElementById("respuesta-container").classList.add("hidden");
+            document.getElementById("pregunta-container").classList.remove("hidden");
+            cambiarVideo();
         }
 
-        function responder(respuesta) {
-            const mensaje = respuesta === 'si' ? obtenerAleatorio(respuestasSi) : obtenerAleatorio(respuestasNo);
-            document.getElementById("pregunta").textContent = mensaje;
-            setTimeout(mostrarPregunta, 4000); // Volver a mostrar otra pregunta tras 4 segundos
+        function responder(opcion) {
+            let respuesta;
+            if (opcion === "si") {
+                respuesta = obtenerAleatorio(respuestasSi);
+            } else {
+                respuesta = obtenerAleatorio(respuestasNo);
+            }
+
+            document.getElementById("respuesta").textContent = respuesta;
+            document.getElementById("pregunta-container").classList.add("hidden");
+            document.getElementById("respuesta-container").classList.remove("hidden");
+            
+            setTimeout(mostrarMensajeFinal, 4000); // Despedida después de 4s
         }
 
-        function obtenerVideoAleatorio() {
-            return obtenerAleatorio(videos) + "?t=" + new Date().getTime();
+        function mostrarMensajeFinal() {
+            document.getElementById("respuesta-container").classList.add("fade-out");
+            setTimeout(() => {
+                document.body.innerHTML = '<h1 style="color: white; text-align: center;">"Esto es un paso hacia el cambio"</h1>';
+            }, 2000);
         }
 
-        // Cargar contenido inicial
-        window.addEventListener("load", () => {
-            mostrarPregunta();
-            const videoElemento = document.getElementById("background-video");
-            const fuenteVideo = document.getElementById("video-source");
-            fuenteVideo.src = obtenerVideoAleatorio();
-            videoElemento.load();
-        });
+        function cambiarVideo() {
+            const nuevoVideo = obtenerAleatorio(videos);
+            document.getElementById("video-source").src = nuevoVideo;
+            document.getElementById("background-video").load();
+        }
+
+        window.onload = cargarPregunta;
     </script>
 </body>
 </html>
