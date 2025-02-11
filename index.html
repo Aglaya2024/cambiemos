@@ -57,8 +57,8 @@
             opacity: 0;
             animation: fadeIn 4s forwards;
         }
-        .desvanecer {
-            animation: fadeOut 5s forwards;
+        .fade-out {
+            animation: fadeOut 6s forwards;
         }
         @keyframes fadeIn {
             from { opacity: 0; }
@@ -86,10 +86,6 @@
         .boton-gif:hover {
             transform: scale(1.1);
         }
-        .boton-gif img {
-            width: 100%;
-            height: auto;
-        }
     </style>
 </head>
 <body>
@@ -101,37 +97,39 @@
         <h1 id="pregunta"></h1>
         <div class="botones" id="botones">
             <button class="boton-gif" onclick="mostrarRespuesta(true)">
-                <img src="URL_BOTON_SI_GIF" alt="Sí">
+                <img src="URL_BOTON_SI_GIF" alt="SI">
             </button>
             <button class="boton-gif" onclick="mostrarRespuesta(false)">
-                <img src="URL_BOTON_NO_GIF" alt="No">
+                <img src="URL_BOTON_NO_GIF" alt="NO">
             </button>
         </div>
     </div>
     <script>
         const preguntas = [
-            "¿Te gustaría hacer algo por un mundo mejor?",
-            "¿Crees que un pequeño gesto puede cambiar la vida de alguien?",
-            "¿Estás dispuesto a ser parte del cambio?",
-            "¿Piensas que ayudar a los demás te hace mejor persona?",
-            "¿Te comprometes a hacer una acción positiva hoy?"
+            "CUIDARAS EL MEDIO AMBIENTE HOY?",
+            "AYUDARAS A ALGUIEN SIN ESPERAR NADA A CAMBIO?",
+            "HARAS ALGO PARA MEJORAR TU COMUNIDAD?",
+            "SERAS MAS EMPATICO CON LOS DEMAS?",
+            "ACTUARAS CON HONESTIDAD EN TODO MOMENTO?",
+            "CONFIARAS MAS EN TI MISMO?",
+            "TRABAJARAS DURO POR TUS METAS?",
+            "HABLARAS CON ALGUIEN QUE LO NECESITE?",
+            "DIFUNDIRAS UN MENSAJE POSITIVO HOY?",
+            "PERDONARAS A ALGUIEN QUE TE HA HERIDO?"
         ];
         const respuestasSi = [
-            "¡Genial! Todo gran cambio empieza con un primer paso.",
-            "Tu decisión puede inspirar a otros a hacer lo mismo.",
-            "Hoy es el día para empezar, ¡tú puedes!",
-            "Cada pequeño esfuerzo suma para lograr un mundo mejor.",
-            "Tu acción hoy marcará la diferencia." 
+            "EXCELENTE! CADA PEQUENO GESTO SUMA.",
+            "TU DECISION PUEDE CAMBIAR VIDAS.",
+            "LO MEJOR DEL MUNDO ES GENTE COMO TU!",
+            "TODO EMPIEZA POR UNA DECISION!",
+            "INSPIRARAS A LOS DEMAS CON TU EJEMPLO!"
         ];
         const respuestasNo = [
-            "No pasa nada, reflexiona y vuelve cuando estés listo.",
-            "El primer paso es reconocer que podemos hacer más.",
-            "Quizás más adelante te animes a dar el paso.",
-            "No hay prisa, pero cada momento cuenta.",
-            "Cuando te sientas listo, el cambio te estará esperando."
-        ];
-        const videos = [
-            "URL_VIDEO_1", "URL_VIDEO_2", "URL_VIDEO_3", "URL_VIDEO_4", "URL_VIDEO_5", "URL_VIDEO_6", "URL_VIDEO_7", "URL_VIDEO_8"
+            "AUN PUEDES REFLEXIONAR Y CAMBIAR!",
+            "CADA DIA ES UNA NUEVA OPORTUNIDAD!",
+            "EL CAMBIO LLEGA CUANDO ESTAS LISTO!",
+            "LO IMPORTANTE ES QUE LO PIENSES!",
+            "CUANDO QUIERAS, PUEDES VOLVER A INTENTARLO!"
         ];
         
         function obtenerAleatorio(lista) {
@@ -149,26 +147,17 @@
             const preguntaElemento = document.getElementById("pregunta");
             preguntaElemento.textContent = respuesta;
             preguntaElemento.classList.add("respuesta");
-            setTimeout(() => mostrarMensajeFinal("Tú tienes el poder de hacer la diferencia."), 6000);
+            setTimeout(() => mostrarMensajeFinal("TU TIENES EL PODER DE HACER LA DIFERENCIA."), 6000);
         }
         
         function mostrarMensajeFinal(texto) {
             document.getElementById("pregunta").textContent = texto;
-            setTimeout(() => mostrarMensajeFinal("Gracias!"), 6000);
-            setTimeout(() => document.getElementById("pregunta").classList.add("desvanecer"), 12000);
+            setTimeout(() => mostrarMensajeFinal("GRACIAS!"), 6000);
+            setTimeout(() => document.getElementById("pregunta").classList.add("fade-out"), 12000);
         }
         
-        function cambiarVideo() {
-            const videoElemento = document.getElementById("background-video");
-            const fuenteVideo = document.getElementById("video-source");
-            fuenteVideo.src = obtenerAleatorio(videos);
-            videoElemento.load();
-        }
-        
-        window.addEventListener("load", () => {
-            iniciarPregunta();
-            cambiarVideo();
-        });
+        window.addEventListener("load", iniciarPregunta);
     </script>
 </body>
 </html>
+
