@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cambiemos el Mundo</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Playfair+Display:wght@400;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap');
 
         * {
             margin: 0;
@@ -13,7 +13,7 @@
             box-sizing: border-box;
         }
         body {
-            font-family: 'Playfair Display', serif;
+            font-family: 'Nunito', sans-serif;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -48,17 +48,17 @@
             border-radius: 10px;
             box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
             max-width: 70%;
-            animation: fadeIn 1.5s ease-in-out;
+            animation: fadeIn 2s ease-in-out;
         }
         .respuesta {
             font-size: 20px;
-            font-family: 'Cinzel', serif;
+            font-family: 'Nunito', sans-serif;
             color: #FFD700;
             opacity: 0;
-            animation: fadeIn 3s forwards;
+            animation: fadeIn 4s forwards;
         }
         .desvanecer {
-            animation: fadeOut 3s forwards;
+            animation: fadeOut 5s forwards;
         }
         @keyframes fadeIn {
             from { opacity: 0; }
@@ -70,20 +70,26 @@
         }
         .botones {
             display: none;
-            margin-top: 15px;
+            margin-top: 30px;
+            display: flex;
+            gap: 20px;
+            justify-content: center;
         }
-        button {
-            padding: 10px 20px;
-            margin: 5px;
-            font-size: 18px;
+        .boton-gif {
+            width: 80px;
+            height: 80px;
+            background: none;
             border: none;
             cursor: pointer;
-            border-radius: 5px;
-            transition: 0.3s;
+            transition: transform 0.3s ease-in-out;
         }
-        .si { background: green; color: white; }
-        .no { background: red; color: white; }
-        button:hover { opacity: 0.8; }
+        .boton-gif:hover {
+            transform: scale(1.1);
+        }
+        .boton-gif img {
+            width: 100%;
+            height: auto;
+        }
     </style>
 </head>
 <body>
@@ -94,8 +100,12 @@
     <div class="container">
         <h1 id="pregunta"></h1>
         <div class="botones" id="botones">
-            <button class="si" onclick="mostrarRespuesta(true)">Sí</button>
-            <button class="no" onclick="mostrarRespuesta(false)">No</button>
+            <button class="boton-gif" onclick="mostrarRespuesta(true)">
+                <img src="URL_BOTON_SI_GIF" alt="Sí">
+            </button>
+            <button class="boton-gif" onclick="mostrarRespuesta(false)">
+                <img src="URL_BOTON_NO_GIF" alt="No">
+            </button>
         </div>
     </div>
     <script>
@@ -130,7 +140,7 @@
         
         function iniciarPregunta() {
             document.getElementById("pregunta").textContent = obtenerAleatorio(preguntas);
-            setTimeout(() => document.getElementById("botones").style.display = "block", 3000);
+            setTimeout(() => document.getElementById("botones").style.display = "flex", 3000);
         }
         
         function mostrarRespuesta(esSi) {
@@ -139,13 +149,13 @@
             const preguntaElemento = document.getElementById("pregunta");
             preguntaElemento.textContent = respuesta;
             preguntaElemento.classList.add("respuesta");
-            setTimeout(() => mostrarMensajeFinal("Tú tienes el poder de hacer la diferencia."), 15000);
+            setTimeout(() => mostrarMensajeFinal("Tú tienes el poder de hacer la diferencia."), 6000);
         }
         
         function mostrarMensajeFinal(texto) {
             document.getElementById("pregunta").textContent = texto;
-            setTimeout(() => mostrarMensajeFinal("Gracias!"), 4000);
-            setTimeout(() => document.getElementById("pregunta").classList.add("desvanecer"), 8000);
+            setTimeout(() => mostrarMensajeFinal("Gracias!"), 6000);
+            setTimeout(() => document.getElementById("pregunta").classList.add("desvanecer"), 12000);
         }
         
         function cambiarVideo() {
