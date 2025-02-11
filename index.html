@@ -98,7 +98,7 @@
 <body>
     <img src="https://raw.githubusercontent.com/Aglaya2024/cambiemos/refs/heads/main/Disen%CC%83o%20sin%20ti%CC%81tulo(52)(2).png" alt="Logo" class="logo">
     <video id="background-video" autoplay loop muted playsinline>
-        <source id="video-source" src="" type="video/mp4">
+        <source id="video-source" src="https://github.com/Aglaya2024/cambiemos/raw/refs/heads/main/Disen%CC%83o%20sin%20ti%CC%81tulo(4).mp4" type="video/mp4">
     </video>
     <div class="container">
         <h1 id="pregunta"></h1>
@@ -112,6 +112,20 @@
         </div>
     </div>
     <script>
+        const videos = [
+            "https://github.com/Aglaya2024/cambiemos/raw/refs/heads/main/Disen%CC%83o%20sin%20ti%CC%81tulo(4).mp4",
+            "https://github.com/Aglaya2024/cambiemos/raw/refs/heads/main/Disen%CC%83o%20sin%20ti%CC%81tulo(5).mp4",
+            "https://github.com/Aglaya2024/cambiemos/raw/refs/heads/main/Disen%CC%83o%20sin%20ti%CC%81tulo(7).mp4",
+        
+        ];
+        
+        function obtenerVideoAleatorio() {
+            return videos[Math.floor(Math.random() * videos.length)];
+        }
+        
+        document.getElementById("video-source").src = obtenerVideoAleatorio();
+        document.getElementById("background-video").load();
+        
         const preguntas = [
             "¿CUIDARÁS EL MEDIO AMBIENTE HOY?",
             "¿AYUDARÁS A ALGUIEN SIN ESPERAR NADA A CAMBIO?",
@@ -159,5 +173,6 @@
     </script>
 </body>
 </html>
+
 
 
