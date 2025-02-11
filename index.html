@@ -53,7 +53,7 @@
         .respuesta {
             font-size: 20px;
             font-family: 'Nunito', sans-serif;
-            color: #FFD700;
+            color: white;
             opacity: 0;
             animation: fadeIn 4s forwards;
         }
@@ -78,13 +78,22 @@
         .boton-gif {
             width: 80px;
             height: 80px;
-            background: none;
-            border: none;
+            background: #ffffff;
+            border-radius: 10px;
+            border: 2px solid #ccc;
             cursor: pointer;
-            transition: transform 0.3s ease-in-out;
+            transition: transform 0.3s ease-in-out, background 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
         .boton-gif:hover {
             transform: scale(1.1);
+            background: #f1f1f1;
+        }
+        .boton-gif img {
+            width: 60px;
+            height: auto;
         }
     </style>
 </head>
@@ -105,31 +114,17 @@
         </div>
     </div>
     <script>
-        const preguntas = [
-            "CUIDARAS EL MEDIO AMBIENTE HOY?",
-            "AYUDARAS A ALGUIEN SIN ESPERAR NADA A CAMBIO?",
-            "HARAS ALGO PARA MEJORAR TU COMUNIDAD?",
-            "SERAS MAS EMPATICO CON LOS DEMAS?",
-            "ACTUARAS CON HONESTIDAD EN TODO MOMENTO?",
-            "CONFIARAS MAS EN TI MISMO?",
-            "TRABAJARAS DURO POR TUS METAS?",
-            "HABLARAS CON ALGUIEN QUE LO NECESITE?",
-            "DIFUNDIRAS UN MENSAJE POSITIVO HOY?",
-            "PERDONARAS A ALGUIEN QUE TE HA HERIDO?"
-        ];
-        const respuestasSi = [
-            "EXCELENTE! CADA PEQUENO GESTO SUMA.",
-            "TU DECISION PUEDE CAMBIAR VIDAS.",
-            "LO MEJOR DEL MUNDO ES GENTE COMO TU!",
-            "TODO EMPIEZA POR UNA DECISION!",
-            "INSPIRARAS A LOS DEMAS CON TU EJEMPLO!"
-        ];
-        const respuestasNo = [
-            "AUN PUEDES REFLEXIONAR Y CAMBIAR!",
-            "CADA DIA ES UNA NUEVA OPORTUNIDAD!",
-            "EL CAMBIO LLEGA CUANDO ESTAS LISTO!",
-            "LO IMPORTANTE ES QUE LO PIENSES!",
-            "CUANDO QUIERAS, PUEDES VOLVER A INTENTARLO!"
+        const frasesReflexion = [
+            "JUNTOS PODEMOS CREAR UN MUNDO MEJOR, PERO TODO EMPIEZA CONTIGO.",
+            "CADA PEQUEÑA ACCIÓN QUE TOMAS IMPACTA EN EL FUTURO.",
+            "EL CAMBIO NO SE ESPERA, SE CONSTRUYE PASO A PASO.",
+            "LA SOLIDARIDAD ES LA CLAVE PARA UN MUNDO MÁS JUSTO.",
+            "SI TODOS APORTAMOS UN GRANITO DE ARENA, PODEMOS CREAR UNA MONTAÑA DE ESPERANZA.",
+            "ACTUAR POR LOS DEMÁS ES TAMBIÉN ACTUAR POR UNO MISMO.",
+            "UN ACTO DE BONDAD PUEDE CAMBIAR UNA VIDA.",
+            "HOY TIENES LA OPORTUNIDAD DE HACER ALGO EXTRAORDINARIO.",
+            "EL FUTURO QUE QUEREMOS DEPENDE DE LO QUE HAGAMOS HOY.",
+            "NUNCA SUBESTIMES EL PODER DE UNA SOLA BUENA ACCIÓN."
         ];
         
         function obtenerAleatorio(lista) {
@@ -137,23 +132,13 @@
         }
         
         function iniciarPregunta() {
-            document.getElementById("pregunta").textContent = obtenerAleatorio(preguntas);
+            document.getElementById("pregunta").textContent = obtenerAleatorio(frasesReflexion);
             setTimeout(() => document.getElementById("botones").style.display = "flex", 3000);
         }
         
-        function mostrarRespuesta(esSi) {
-            document.getElementById("botones").style.display = "none";
-            const respuesta = esSi ? obtenerAleatorio(respuestasSi) : obtenerAleatorio(respuestasNo);
-            const preguntaElemento = document.getElementById("pregunta");
-            preguntaElemento.textContent = respuesta;
-            preguntaElemento.classList.add("respuesta");
-            setTimeout(() => mostrarMensajeFinal("TU TIENES EL PODER DE HACER LA DIFERENCIA."), 6000);
-        }
-        
-        function mostrarMensajeFinal(texto) {
-            document.getElementById("pregunta").textContent = texto;
-            setTimeout(() => mostrarMensajeFinal("GRACIAS!"), 6000);
-            setTimeout(() => document.getElementById("pregunta").classList.add("fade-out"), 12000);
+        function mostrarMensajeFinal() {
+            document.getElementById("pregunta").textContent = obtenerAleatorio(frasesReflexion);
+            setTimeout(() => document.getElementById("pregunta").classList.add("fade-out"), 6000);
         }
         
         window.addEventListener("load", iniciarPregunta);
