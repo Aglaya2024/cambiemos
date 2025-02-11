@@ -55,10 +55,10 @@
             font-family: 'Nunito', sans-serif;
             color: white;
             opacity: 0;
-            animation: fadeIn 4s forwards;
+            animation: fadeIn 2s forwards;
         }
         .fade-out {
-            animation: fadeOut 6s forwards;
+            animation: fadeOut 3s forwards;
         }
         @keyframes fadeIn {
             from { opacity: 0; }
@@ -69,25 +69,28 @@
             to { opacity: 0; }
         }
         .botones {
-            display: none;
-            margin-top: 30px;
             display: flex;
+            margin-top: 30px;
             gap: 20px;
             justify-content: center;
         }
         .boton-gif {
-            width: 80px;
-            height: 80px;
-            background: none;
+            width: 100px;
+            height: 100px;
+            background: white;
             border: none;
+            border-radius: 10px;
             cursor: pointer;
             transition: transform 0.3s ease-in-out;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
         .boton-gif:hover {
             transform: scale(1.1);
         }
         .boton-gif img {
-            width: 100%;
+            width: 70px;
             height: auto;
         }
     </style>
@@ -114,12 +117,7 @@
             "¿AYUDARÁS A ALGUIEN SIN ESPERAR NADA A CAMBIO?",
             "¿HARÁS ALGO PARA MEJORAR TU COMUNIDAD?",
             "¿SERÁS MÁS EMPÁTICO CON LOS DEMÁS?",
-            "¿ACTUARÁS CON HONESTIDAD EN TODO MOMENTO?",
-            "¿CONFIARÁS MÁS EN TI MISMO?",
-            "¿TRABAJARÁS DURO POR TUS METAS?",
-            "¿HABLARÁS CON ALGUIEN QUE LO NECESITE?",
-            "¿DIFUNDIRÁS UN MENSAJE POSITIVO HOY?",
-            "¿PERDONARÁS A ALGUIEN QUE TE HA HERIDO?"
+            "¿ACTUARÁS CON HONESTIDAD EN TODO MOMENTO?"
         ];
         
         const respuestasSi = [
@@ -151,7 +149,10 @@
             document.getElementById("botones").style.display = "none";
             const respuesta = esSi ? obtenerAleatorio(respuestasSi) : obtenerAleatorio(respuestasNo);
             document.getElementById("pregunta").textContent = respuesta;
-            setTimeout(() => document.getElementById("pregunta").classList.add("fade-out"), 6000);
+            setTimeout(() => {
+                document.getElementById("pregunta").textContent = "GRACIAS POR FORMAR PARTE DEL CAMBIO.";
+                document.getElementById("pregunta").classList.add("fade-out");
+            }, 4000);
         }
         
         window.addEventListener("load", iniciarPregunta);
