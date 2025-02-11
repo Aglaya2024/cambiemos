@@ -110,16 +110,32 @@
     </div>
     <script>
         const preguntas = [
-            "CUIDARAS EL MEDIO AMBIENTE HOY?",
-            "AYUDARAS A ALGUIEN SIN ESPERAR NADA A CAMBIO?",
-            "HARAS ALGO PARA MEJORAR TU COMUNIDAD?",
-            "SERAS MAS EMPATICO CON LOS DEMAS?",
-            "ACTUARAS CON HONESTIDAD EN TODO MOMENTO?",
-            "CONFIARAS MAS EN TI MISMO?",
-            "TRABAJARAS DURO POR TUS METAS?",
-            "HABLARAS CON ALGUIEN QUE LO NECESITE?",
-            "DIFUNDIRAS UN MENSAJE POSITIVO HOY?",
-            "PERDONARAS A ALGUIEN QUE TE HA HERIDO?"
+            "¿CUIDARÁS EL MEDIO AMBIENTE HOY?",
+            "¿AYUDARÁS A ALGUIEN SIN ESPERAR NADA A CAMBIO?",
+            "¿HARÁS ALGO PARA MEJORAR TU COMUNIDAD?",
+            "¿SERÁS MÁS EMPÁTICO CON LOS DEMÁS?",
+            "¿ACTUARÁS CON HONESTIDAD EN TODO MOMENTO?",
+            "¿CONFIARÁS MÁS EN TI MISMO?",
+            "¿TRABAJARÁS DURO POR TUS METAS?",
+            "¿HABLARÁS CON ALGUIEN QUE LO NECESITE?",
+            "¿DIFUNDIRÁS UN MENSAJE POSITIVO HOY?",
+            "¿PERDONARÁS A ALGUIEN QUE TE HA HERIDO?"
+        ];
+        
+        const respuestasSi = [
+            "¡EXCELENTE! CADA PEQUEÑO GESTO SUMA.",
+            "TU DECISIÓN PUEDE CAMBIAR VIDAS.",
+            "LO MEJOR DEL MUNDO ES GENTE COMO TÚ!",
+            "TODO EMPIEZA POR UNA DECISIÓN!",
+            "INSPIRARÁS A LOS DEMÁS CON TU EJEMPLO!"
+        ];
+        
+        const respuestasNo = [
+            "AÚN PUEDES REFLEXIONAR Y CAMBIAR!",
+            "CADA DÍA ES UNA NUEVA OPORTUNIDAD!",
+            "EL CAMBIO LLEGA CUANDO ESTÁS LISTO!",
+            "LO IMPORTANTE ES QUE LO PIENSES!",
+            "CUANDO QUIERAS, PUEDES VOLVER A INTENTARLO!"
         ];
         
         function obtenerAleatorio(lista) {
@@ -127,14 +143,14 @@
         }
         
         function iniciarPregunta() {
-            const preguntaElemento = document.getElementById("pregunta");
-            preguntaElemento.textContent = obtenerAleatorio(preguntas);
-            document.getElementById("botones").style.display = "flex";
+            document.getElementById("pregunta").textContent = obtenerAleatorio(preguntas);
+            setTimeout(() => document.getElementById("botones").style.display = "flex", 3000);
         }
         
         function mostrarRespuesta(esSi) {
             document.getElementById("botones").style.display = "none";
-            document.getElementById("pregunta").textContent = "GRACIAS POR FORMAR PARTE DEL CAMBIO.";
+            const respuesta = esSi ? obtenerAleatorio(respuestasSi) : obtenerAleatorio(respuestasNo);
+            document.getElementById("pregunta").textContent = respuesta;
             setTimeout(() => document.getElementById("pregunta").classList.add("fade-out"), 6000);
         }
         
